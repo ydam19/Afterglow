@@ -252,5 +252,9 @@ def not_found(e):
 
 if __name__ == "__main__":
     init_db()
-    # macOS는 5000번 포트를 AirPlay 수신이 점유(HTTP 403) → 8000번 사용
-    app.run(debug=True, port=8000)
+    # 배포 시 모든 인터페이스(0.0.0.0)로 공개 → 공용 IP로 접속 가능
+    # macOS 로컬은 5000번을 AirPlay가 점유하므로 8000번 사용
+    # 로컬 개발에서 자동 리로드가 필요하면 FLASK_DEBUG=1 로 실행
+    port = int(os.environ.get("PORT", 8000))
+    debug = os.environ.get("FLASK_DEBUG", "") == "1"
+    app.run(host="0.0.0.0", port=port, debug=debug)
