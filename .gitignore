@@ -13,6 +13,9 @@ venv/
 .venv/
 env/
 
+# 인수인계 문서 (인프라 정보 포함 — 공개 레포 제외)
+HANDOFF.md
+
 # OS / 에디터
 .DS_Store
 *.swp
