@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="empty">
+  <p class="big">필름이 끊긴 자리</p>
+  <p>찾는 기록이 없네요.</p>
+  <a class="btn-new" href="{{ url_for('index') }}">아카이브로 돌아가기</a>
+</div>
+{% endblock %}

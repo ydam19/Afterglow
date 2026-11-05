@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}오늘 기록 · Afterglow{% endblock %}
+{% block content %}
+
+<h1 class="page-title">오늘의 한 컷</h1>
+
+<form class="entry-form" method="post" enctype="multipart/form-data">
+  <label class="field">
+    <span>날짜</span>
+    <input type="date" name="entry_date" value="{{ today }}">
+  </label>
+
+  <div class="field">
+    <span>오늘의 마음</span>
+    <div class="mood-pick">
+      {% for key, label in MOODS.items() %}
+        <label class="mood-opt">
+          <input type="radio" name="mood" value="{{ key }}" {{ 'checked' if loop.first }}>
+          <span class="bubble">{{ label }}</span>
+        </label>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="field">
+    <span>사진</span>
+    <div class="file-field">
+      <label class="file-btn">
+        사진 선택
+        <input type="file" name="image" accept="image/*">
+      </label>
+      <span class="file-name">선택된 파일 없음</span>
+    </div>
+  </div>
+
+  <label class="field">
+    <span>한 줄 일기</span>
+    <textarea name="note" rows="3" maxlength="200"
+              placeholder="오늘을 한 줄로 남겨보세요..."></textarea>
+  </label>
+
+  <div class="actions">
+    <a class="btn-ghost" href="{{ url_for('index') }}">취소</a>
+    <button class="btn-new" type="submit">기록하기</button>
+  </div>
+</form>
+
+{% endblock %}

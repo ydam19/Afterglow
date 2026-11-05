@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}무드 캘린더 · Afterglow{% endblock %}
+{% block content %}
+
+<div class="cal-head">
+  <a class="nav-arrow" href="{{ url_for('calendar_view', year=prev_year, month=prev_month) }}">‹</a>
+  <h1 class="page-title">{{ year }}년 {{ month }}월</h1>
+  <a class="nav-arrow" href="{{ url_for('calendar_view', year=next_year, month=next_month) }}">›</a>
+</div>
+
+<table class="calendar">
+  <thead>
+    <tr>
+      {% for d in ["일","월","화","수","목","금","토"] %}<th>{{ d }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for week in weeks %}
+      <tr>
+        {% for day in week %}
+          {% if day == 0 %}
+            <td class="empty-cell"></td>
+          {% else %}
+            {% set e = by_day.get(day) %}
+            {% if e %}
+              <td class="has-entry {{ 'has-photo' if e.image }}">
+                <a href="{{ url_for('detail', entry_id=e.id) }}">
+                  {% if e.image %}
+                    <img class="cal-thumb" src="{{ url_for('static', filename='uploads/' ~ e.image) }}" alt="">
+                  {% endif %}
+                  <span class="d">{{ day }}</span>
+                  <span class="mood">{{ MOODS[e.mood] }}</span>
+                </a>
+              </td>
+            {% else %}
+              <td{% if today.year == year and today.month == month and today.day == day %} class="is-today"{% endif %}>
+                <span class="d">{{ day }}</span>
+              </td>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

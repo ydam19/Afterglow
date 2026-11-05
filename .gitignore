@@ -1,0 +1,20 @@
+# 개인 데이터 (기록 DB·업로드 사진)
+diary.db
+static/uploads/*
+!static/uploads/.gitkeep
+
+# 배경 사진 (개인 이미지)
+static/img/window.jpg
+
+# 파이썬
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+
+# OS / 에디터
+.DS_Store
+*.swp
+.idea/
+.vscode/

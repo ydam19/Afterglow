@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ e.entry_date }} · Afterglow{% endblock %}
+{% block content %}
+
+<article class="detail">
+  <div class="detail-photo">
+    {% if e.image %}
+      <img src="{{ url_for('static', filename='uploads/' ~ e.image) }}" alt="">
+    {% else %}
+      <div class="no-photo big"><span>{{ MOODS[e.mood] }}</span></div>
+    {% endif %}
+  </div>
+
+  <div class="detail-body">
+    <span class="date">{{ e.entry_date }}</span>
+    <span class="mood-tag">{{ MOODS[e.mood] }}</span>
+    <p class="detail-note">{{ e.note or "남겨둔 한 줄이 없어요." }}</p>
+
+    <div class="actions">
+      <a class="btn-ghost" href="{{ url_for('index') }}">← 아카이브</a>
+      <form method="post" action="{{ url_for('delete', entry_id=e.id) }}"
+            onsubmit="return confirm('이 기록을 지울까요?');">
+        <button class="btn-danger" type="submit">삭제</button>
+      </form>
+    </div>
+  </div>
+</article>
+
+{% endblock %}

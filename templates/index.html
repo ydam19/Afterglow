@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <p class="hero-date">{{ today_label }}</p>
+  <h1 class="hero-title">Afterglow</h1>
+  <span class="hero-rule"></span>
+  <p class="hero-quote">{{ quote }}</p>
+  <p class="hero-sub">해 질 녘, 오늘의 한 조각을 담아두는 곳</p>
+  <a class="btn-new hero-cta" href="{{ url_for('new') }}">오늘의 한 컷 남기기</a>
+  {% if entries %}
+    <a class="hero-archive" href="{{ url_for('archive') }}">지금까지 {{ entries|length }}개의 조각 보기 →</a>
+  {% endif %}
+</section>
+
+{% endblock %}

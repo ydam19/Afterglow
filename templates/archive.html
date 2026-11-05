@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}아카이브 · Afterglow{% endblock %}
+{% block content %}
+
+<h1 class="page-title">아카이브</h1>
+
+<div class="mood-filter">
+  <a href="{{ url_for('archive') }}" class="chip {{ 'on' if not active_mood }}">전체</a>
+  {% for key, label in MOODS.items() %}
+    <a href="{{ url_for('archive', mood=key) }}"
+       class="chip {{ 'on' if active_mood == key }}">{{ label }}</a>
+  {% endfor %}
+</div>
+
+{% if entries %}
+  <div class="album-grid">
+    {% for e in entries %}
+      <div class="float">
+        <a class="polaroid" href="{{ url_for('detail', entry_id=e.id) }}">
+          <div class="photo">
+            {% if e.image %}
+              <img src="{{ url_for('static', filename='uploads/' ~ e.image) }}" alt="">
+            {% else %}
+              <div class="no-photo"><span>{{ MOODS[e.mood] }}</span></div>
+            {% endif %}
+          </div>
+          <div class="caption">
+            <span class="date">{{ e.entry_date }}</span>
+            <p class="note">{{ e.note or MOODS[e.mood] }}</p>
+            <span class="mood-label">{{ MOODS[e.mood] }}</span>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty">
+    <p class="big">아직 담긴 조각이 없어요</p>
+    <p>오늘의 한 컷과 마음을 남겨볼까요</p>
+    <a class="btn-new" href="{{ url_for('new') }}">첫 기록 남기기</a>
+  </div>
+{% endif %}
+
+{% endblock %}
