@@ -19,13 +19,13 @@
         <a class="polaroid" href="{{ url_for('detail', entry_id=e.id) }}">
           <div class="photo">
             {% if e.image %}
-              <img src="{{ url_for('static', filename='uploads/' ~ e.image) }}" alt="">
+              <img src="{{ e.image_url }}" alt="">
             {% else %}
               <div class="no-photo"><span>{{ MOODS[e.mood] }}</span></div>
             {% endif %}
           </div>
           <div class="caption">
-            <span class="date">{{ e.entry_date }}</span>
+            <span class="date">{{ e.entry_date }}{% if e.sunset %} <span class="sunset-mini">· 노을 {{ e.sunset }}</span>{% endif %}</span>
             <p class="note">{{ e.note or MOODS[e.mood] }}</p>
             <span class="mood-label">{{ MOODS[e.mood] }}</span>
           </div>

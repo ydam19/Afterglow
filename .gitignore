@@ -6,6 +6,9 @@ static/uploads/*
 # 배경 사진 (개인 이미지)
 static/img/window.jpg
 
+# 비밀 설정 (Supabase 키·SECRET_KEY)
+.env
+
 # 파이썬
 __pycache__/
 *.py[cod]

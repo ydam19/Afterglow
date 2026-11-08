@@ -26,7 +26,7 @@
               <td class="has-entry {{ 'has-photo' if e.image }}">
                 <a href="{{ url_for('detail', entry_id=e.id) }}">
                   {% if e.image %}
-                    <img class="cal-thumb" src="{{ url_for('static', filename='uploads/' ~ e.image) }}" alt="">
+                    <img class="cal-thumb" src="{{ e.image_url }}" alt="">
                   {% endif %}
                   <span class="d">{{ day }}</span>
                   <span class="mood">{{ MOODS[e.mood] }}</span>

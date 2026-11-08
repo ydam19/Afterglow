@@ -3,6 +3,7 @@
 
 <section class="hero">
   <p class="hero-date">{{ today_label }}</p>
+  {% if today_sunset %}<p class="hero-sunset">오늘의 노을 <time>{{ today_sunset }}</time> · 서울</p>{% endif %}
   <h1 class="hero-title">Afterglow</h1>
   <span class="hero-rule"></span>
   <p class="hero-quote">{{ quote }}</p>

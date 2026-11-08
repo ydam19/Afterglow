@@ -20,9 +20,17 @@
   <header class="site-header">
     <a class="logo" href="{{ url_for('index') }}">Afterglow<small>하루의 여운</small></a>
     <nav>
-      <a href="{{ url_for('archive') }}">아카이브</a>
-      <a href="{{ url_for('calendar_view') }}">캘린더</a>
-      <a class="btn-new" href="{{ url_for('new') }}">+ 오늘 기록</a>
+      {% if session.get('sb_tokens') %}
+        <a href="{{ url_for('archive') }}">아카이브</a>
+        <a href="{{ url_for('calendar_view') }}">캘린더</a>
+        <a class="btn-new" href="{{ url_for('new') }}">+ 오늘 기록</a>
+        <form class="logout-form" method="post" action="{{ url_for('logout') }}">
+          <button type="submit" title="{{ session.get('user_email', '') }}">로그아웃</button>
+        </form>
+      {% else %}
+        <a href="{{ url_for('login') }}">로그인</a>
+        <a class="btn-new" href="{{ url_for('signup') }}">가입하기</a>
+      {% endif %}
     </nav>
   </header>
 

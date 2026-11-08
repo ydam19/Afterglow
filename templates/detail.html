@@ -5,7 +5,7 @@
 <article class="detail">
   <div class="detail-photo">
     {% if e.image %}
-      <img src="{{ url_for('static', filename='uploads/' ~ e.image) }}" alt="">
+      <img src="{{ e.image_url }}" alt="">
     {% else %}
       <div class="no-photo big"><span>{{ MOODS[e.mood] }}</span></div>
     {% endif %}
@@ -14,6 +14,9 @@
   <div class="detail-body">
     <span class="date">{{ e.entry_date }}</span>
     <span class="mood-tag">{{ MOODS[e.mood] }}</span>
+    {% if e.sunset %}
+      <p class="sunset-line">이날의 노을 <time>{{ e.sunset }}</time>{% if e.sunset_place %}<small>{{ e.sunset_place }} 기준</small>{% endif %}</p>
+    {% endif %}
     <p class="detail-note">{{ e.note or "남겨둔 한 줄이 없어요." }}</p>
 
     <div class="actions">

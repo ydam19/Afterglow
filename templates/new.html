@@ -4,7 +4,7 @@
 
 <h1 class="page-title">오늘의 한 컷</h1>
 
-<form class="entry-form" method="post" enctype="multipart/form-data">
+<form class="entry-form" method="post" enctype="multipart/form-data" data-sunset-submit>
   <label class="field">
     <span>날짜</span>
     <input type="date" name="entry_date" value="{{ today }}">
@@ -33,6 +33,17 @@
     </div>
   </div>
 
+  <div class="field">
+    <span>노을을 본 곳</span>
+    <div class="locate">
+      <input type="hidden" name="lat">
+      <input type="hidden" name="lon">
+      <input type="hidden" name="tz">
+      <button type="button" class="file-btn" data-locate>📍 지금 위치로 맞추기</button>
+      <span class="locate-status" data-locate-status>위치를 남기지 않으면 서울 기준으로 계산해요</span>
+    </div>
+  </div>
+
   <label class="field">
     <span>한 줄 일기</span>
     <textarea name="note" rows="3" maxlength="200"
@@ -44,5 +55,24 @@
     <button class="btn-new" type="submit">기록하기</button>
   </div>
 </form>
+
+<!-- 기록하기 → 저무는 빛 연출 (JS가 사진·한 줄을 채워 켬) -->
+<div class="dusk-scene" aria-hidden="true" hidden>
+  <div class="ds-sky"></div>
+  <div class="ds-light"></div>
+  <div class="ds-afterglow"></div>
+  <div class="ds-sunwrap"><div class="ds-sun"></div></div>
+  <div class="ds-horizon"></div>
+  <div class="ds-reflect"></div>
+  <figure class="ds-frame">
+    <div class="ds-photo"><img alt=""></div>
+    <figcaption class="ds-note"></figcaption>
+  </figure>
+  <div class="ds-grain"></div>
+  <div class="ds-vignette"></div>
+  <p class="ds-caption"><span class="ds-cap-1">오늘이 저물었어요</span><span class="ds-cap-2">여운으로 남겨둘게요</span></p>
+  <button type="button" class="ds-skip" tabindex="-1">넘기기</button>
+</div>
+<p class="sr-only" role="status" aria-live="polite" data-sunset-live></p>
 
 {% endblock %}
